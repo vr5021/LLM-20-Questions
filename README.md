@@ -24,3 +24,4 @@ You can find a detailed guide [here](https://hunseop2772.tistory.com/372).
 ## Citation
 Zoe Mongan, Luke Sernau, Will Lifferth, Bovard Doerschuk-Tiberi, Ryan Holbrook, Will Cukierski, and Addison Howard. LLM 20 Questions. 
 
+![image](https://github.com/user-attachments/assets/514de31a-d1c2-4b56-a7f0-17e70053f24d)
