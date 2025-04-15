@@ -1,3 +1,5 @@
+[English](README.md) | [한국어](README.ko.md)
+
 # [LLM-20-Questions](https://kaggle.com/competitions/llm-20-questions)
 
 ## Overview
@@ -20,8 +22,8 @@ This repository was copied from a Kaggle notebook designed to run in the Kaggle 
 We used Hugging Face to download open-source LLMs such as LLaMA, Qwen, and Gemma. To do this, you’ll need to sign up for Hugging Face and obtain an HF token.     
 You can find a detailed guide [here](https://hunseop2772.tistory.com/372).   
 
-
 ## Citation
 Zoe Mongan, Luke Sernau, Will Lifferth, Bovard Doerschuk-Tiberi, Ryan Holbrook, Will Cukierski, and Addison Howard. LLM 20 Questions. 
 
+## Certification
 ![image](https://github.com/user-attachments/assets/514de31a-d1c2-4b56-a7f0-17e70053f24d)
