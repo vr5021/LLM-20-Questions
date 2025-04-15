@@ -1,0 +1,74 @@
+%%writefile submission/prompts.py
+
+def asker_prompt(category, obs):
+    message = []
+    
+    # System prompt
+    ask_prompt = f"""You are a helpful AI assistant with expertise in playing 20 questions game.
+Your task is to ask questions so that the another guesser can guess the word the user is thinking of.
+The keyword is of category: "{obs.category}"
+Narrow down the possibilities by asking yes/no questions.
+You only ask one yes/no question in your turn. No other verbosity around. 
+Think step by step and try to ask the most informative questions.
+you should consider the possibility that 'yes' or 'no' answers could be wrong .
+\n"""
+
+    message.append({"role": "system", "content": ask_prompt})
+
+    # Chat history
+    for q, a in zip(obs.questions, obs.answers):
+        message.append({"role": "assistant", "content": q})
+        message.append({"role": "user", "content": a})
+
+    return message
+
+
+def guesser_prompt(category, obs):
+    message = []
+    
+    # System prompt
+    guess_prompt = f"""You are a helpful AI assistant with expertise in playing 20 questions game.
+Your task is to guess the word the user is thinking of.
+The correct answer is of category: "{category}"
+You shouldn't repeat the guess you guessed before.
+Think step by step.
+\n"""
+
+    # Chat history
+    chat_history = ""
+    for q, a in zip(obs.questions, obs.answers):
+        chat_history += f"""Question: {q}\nAnswer: {a}\n"""
+    prompt = (
+            guess_prompt + f"""so far, the current state of the game is as following:\n{chat_history}
+        based on the conversation(Wrong answers can be included. Consider this), can you guess the word like the master of 20 questions, please give only the word."""
+    )
+    
+    
+    message.append({"role": "system", "content": prompt})
+    
+    return message
+
+
+def answerer_prompt(obs):
+    message = []
+    
+    # System prompt
+    prompt = f"""You are a helpful and accurate AI assistant with expertise in playing 20 questions game.
+Your task is to answer the yes or no questions.
+Your answers must be 'yes' or 'no' and correct 
+The correct answer is: "{obs.keyword}", it is of category: "{obs.category}"
+When question is a guess, you must say "yes" only in case the guess is "{obs.keyword}".
+The other? you must say 'no'.
+
+"""
+
+    message.append({"role": "system", "content": prompt})
+    message.append({"role": "user", "content": obs.questions[0]})
+    
+    # Chat history
+    if len(obs.answers)>=1:
+        for q, a in zip(obs.questions[1:], obs.answers):
+            message.append({"role": "assistant", "content": a})
+            message.append({"role": "user", "content": q})
+    
+    return message
